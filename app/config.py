@@ -1,3 +1,7 @@
+from app import requests
+from flask import requests
+
+
 class Config:
     '''
     General configuration parent class
@@ -29,4 +33,4 @@ class Config:
     '''
     General configuration parent class
     '''
-    NEWS_API_BASE_URL ='https://api.thenewsapi.org/3/news/{}?api_key={}'
+    NEWS_API_BASE_URL =requests.args.get('https://newsapi.org/v2/top-headlines?country=us&apiKey=API_KEY')
