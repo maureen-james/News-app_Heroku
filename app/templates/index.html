@@ -1,4 +1,7 @@
+
 {% extends 'base.html'%}
+{% import 'macros.html' as macro%}
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -6,18 +9,42 @@
         {% if title %}
         <title> {{ title }}</title>
         {% else %}
-        <title> Welcome to the best News Review website </title>
+        <title> Welcome to the best News website </title>
         {% endif %}
     </head>
     <body>
+             <!-- Content block -->
+             {% block content %}
         
             <!-- Top headlines section  -->
-       <h3>Top Headlines</h3>
-         <ul>
-                {% for popular_news in popular %}
-                    <li>{{ popular_news.title}}</li>
-                {% endfor %}
-         </ul>
+            <h3> Sports News</h3>
+            <ul>
+                {{ macro.displayNewsList(sports)}}
+           </ul>
+            <!-- tech news -->
+            <h3> Technology Updates</h3>
+             <ul>
+                {{ macro.displayNewsList(technology)}}
+            </ul>
+    
+            <!-- health news  -->
+            <h3> Health Updates</h3>
+             <ul>
+                {{ macro.displayNewsList(health)}}
+            </ul>
+            <!-- business news -->
+            <h3> Business Updates</h3>
+            <ul>
+                {{ macro.displayNewsList(business)}}
+           </ul>
+            </ul>
+             <!-- entertainment news -->
+            <h3> Entertainment Updates</h3>
+            <ul>
+                {{ macro.displayNewsList(entertainment)}}
+           </ul>
+    </body>
+    {% endblock%}
      
 
     </body>

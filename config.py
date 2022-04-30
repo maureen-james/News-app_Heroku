@@ -1,12 +1,14 @@
 import os
 
+
 class Config:
     '''
     General configuration parent class
     '''
-    pass
-
-
+    NEWS_API_BASE_URL = 'https://newsapi.org/v2/top-headlines?country=us&apiKey=API_KEY'
+    NEWS_API_KEY = os.environ.get('NEWS_API_KEY')
+    NEWS_ARTICLE_BASE_URL ='https://newsapi.org/v2/everything?domains=wsj.com&apiKey=API_KEY'
+    SECRET_KEY = os.environ.get('SECRET_KEY')
 
 class ProdConfig(Config):
     '''
@@ -27,9 +29,8 @@ class DevConfig(Config):
     '''
 
     DEBUG = True
-class Config:
-    '''
-    General configuration parent class
-    '''
-    NEWS_API_BASE_URL = 'https://newsapi.org/v2/top-headlines?country=us&apiKey=API_KEY'
-    NEWS_API_KEY = os.environ.get('NEWS_API_KEY')
+
+configs = {
+    'development':DevConfig,
+    'production':ProdConfig
+}
