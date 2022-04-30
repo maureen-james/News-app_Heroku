@@ -3,6 +3,7 @@ from app import app
 from .requests import get_news, get_news
 
 
+
 # Views
 @app.route('/')
 def index():
