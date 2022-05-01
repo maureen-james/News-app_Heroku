@@ -25,7 +25,7 @@ def create_app(config_name):
 # # Initializing Flask Extensions
 
 # #init
-# # newsapi = NewsApiClient(api_key=)
+# newsapi = NewsApiClient(api_key='NEWS_API_KEY')
 
 # from app import app
 
