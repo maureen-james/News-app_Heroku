@@ -1,0 +1,26 @@
+
+{% extends 'base.html'%}
+{% import 'macros.html' as macro%}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        {% if title %}
+        <title> {{ title }}</title>
+        {% else %}
+        <title> Welcome to the best News website </title>
+        {% endif %}
+    </head>
+    <body>
+             <!-- Content block -->
+             {% block content %}
+        
+            <!-- Articles section  -->
+            <h3> Articles</h3>
+            <ul>
+                {{ macro.displayArticlesList(Articles)}}
+           </ul>
+               {% endblock%} 
+    </body>
+</html>
