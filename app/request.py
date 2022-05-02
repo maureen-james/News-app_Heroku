@@ -47,9 +47,12 @@ def process_results(sources_list):
         name=sources.get('name')
         description=sources.get('description')
         url=sources.get('url')
+        category=sources.get('category')
+        country=sources.get('country')
+        language=sources.get('language')
         
         if description:
-            new_source=Source(id,name,description,url)
+            new_source=Source(id,name,description,url,category,country,language)
             source_results.append(new_source)
 
     return source_results
