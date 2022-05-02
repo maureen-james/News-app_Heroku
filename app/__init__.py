@@ -1,32 +1,27 @@
 from flask import Flask
-from config import configs
 from flask_bootstrap import Bootstrap
+from config import configs
 
-# from newsapi import NewsApiClient
-
-app = Flask(__name__,instance_relative_config = True)
 bootstrap = Bootstrap()
 
 def create_app(config_name):
-	# Initializing application
-	app.config.from_object(configs[config_name])
-	bootstrap.init_app(app)
 
-	
-	from . requests import config_request
-	config_request(app)
-	return app
+    app = Flask(__name__)
 
+    # Creating the app configurations
+    app.config.from_object(configs[config_name])
 
+    # Initializing flask extensions
+    bootstrap.init_app(app)
 
-# # Setting up configuration
+    # Will add the views and forms
 
-# app.config.from_pyfile('config.py')
-# # Initializing Flask Extensions
+    # Registering the blueprint
+    from .main import main as main_blueprint
+    app.register_blueprint(main_blueprint)
 
-# #init
-# newsapi = NewsApiClient(api_key='NEWS_API_KEY')
+    # setting config
+    from .request import configure_request
+    configure_request(app)
 
-# from app import app
-
-from app import app
+    return app
