@@ -1,6 +1,7 @@
+
 import urllib.request,json
 from .models import Source,Article
-from . import request
+from datetime import datetime
 
 # Getting api key
 api_key = None
@@ -23,7 +24,7 @@ def get_news(category):
     '''
     Function that gets the json response from our url request
     '''
-    source_api_url=base_url.format(category,api_key)
+    source_api_url='https://newsapi.org/v2/sources?language=en&category={}&apiKey=044e110d04e84886a4057da519c842af'.format(category,api_key)
 
     with urllib.request.urlopen(source_api_url) as url:
         unread_data=url.read()
@@ -50,60 +51,47 @@ def process_results(news_list):
         category=news.get('category')
         country=news.get('country')
         language=news.get('language')
+
         
         if description:
-            new_source=Source(id,name,description,url,category,country,language)
+            new_source=Source( id, name, description, url,category, language, country)
             news_results.append(new_source)
 
     return news_results
 
-def get_article():
-    get_articles_url= 'https://newsapi.org/v2/everything?sources={}apiKey={}'.format(api_key)
+def get_articles(id):
 
-    with urllib.request.urlopen(get_articles_url) as url:
-        get_data=url.read()
-        get_json_data=json.loads(get_data)
+    article_url= 'https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=044e110d04e84886a4057da519c842af'.format(id,api_key)
 
-        articles_data=None
+    with urllib.request.urlopen(article_url) as url:
+        article_details_data = url.read()
+        article_details_response = json.loads(article_details_data)
 
-        if get_json_data['articles']:
-            articles_list=get_json_data['articles']
-            articles_data=process_article(articles_list)
         
-    return articles_data
+        if article_details_response['articles']:
+            article_results_list = article_details_response['articles']
 
-def process_article(articles_data):
-    '''
-    Function  that processes the sources result and transform them to a list of Objects according to objects
-    '''
-    articles_list=[]
+        article_results = []
+        if article_details_response["totalResults"] > 0:
 
-    for article in articles_data:
-        id=article.get('id')
-        author=article.get('author')
-        urlToImage=article.get('urlToImage')
-        description=article.get('description')
-        publishedAt=article.get('publishedAt')
-        url=article.get('url')
-        title=article.get('title')
-        source=article.get('source')
-        if publishedAt and author and urlToImage:
-            new_article=Article(id,author,urlToImage,description,title,url,publishedAt,source)
-            articles_list.append(new_article)
+            for article_item in article_results_list:
+                name= article_item.get('source').get('name')
+                author = article_item.get('author')
+                title = article_item.get('title')
+                urlToImage = article_item.get('urlToImage')
+                description = article_item.get('description')
+                url = article_item.get('url')
+                publishedAt = article_item.get('publishedAt')
+                
+                publishedAt = datetime.strptime(publishedAt, '%Y-%m-%dT%H:%M:%SZ').date()
 
-    return articles_list
+                if urlToImage != "null":
+                    article_object = Article(name,author,urlToImage,description,title,url,publishedAt)
+                    article_results.append(article_object)
+        else:
+            return 
+    return article_results
 
-def search_for_article(article):
-    search_article_url= 'https://newsapi.org/v2/everything?q={}&apiKey=044e110d04e84886a4057da519c842af'.format(article,api_key)
 
-    with urllib.request.urlopen(search_article_url) as url:
-        search_data=url.read()
-        search_json=json.loads(search_data)
+    
 
-        search_article=None
-
-        if search_json['articles']:
-            searches=search_json['articles']
-            search_article=process_article(searches)
-
-    return search_article

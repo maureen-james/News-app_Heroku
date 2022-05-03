@@ -2,46 +2,50 @@
     {% for news in category%}
         
     <div class="container">
-        <!-- <div class="row">
+        <div class="row">
             <div class="col-lg-6 mb-4 col-xs-12 col-sm-12 col-md-4 ">
                 <div class="card h-100">
                   <div class="card-body">
-                    <h4 class="card-title">
+                    <h2 class="card-title">
                     <a href="{{news.url}}" target="_blank">{{news.title}}</a>
-                    </h4>
+                    </h2>
+                   
+                    <p class="card-text">{{news.category}}</p>
+                    <a href="{{news.url}}">{{news.url}}</a>
                     <p class="card-text">{{news.description}}</p>
                 </div>
             <hr style="border-width: 2px;">
         </div>
-    </div> -->
+    </div> 
     {% endfor %}
 {% endmacro%}
-{% macro displayArticlesList(articles_data) %}
-<div id="articles">
-    <div class="row">
-        {% for articles in articles_data %}
-        <div class="col-lg-6 mb-4 col-xs-12 col-sm-12 col-md-4 ">
-            <div class="thumbnail">
-                <div class="caption">
-                    <p>
-                    <img src="{{articles.urlToImage}}" alt="" width="80%">
-                    <h3> {{articles.title}}</h3>
-                    <h4> {{ articles.name}}</h4>
-                    <h5> {{articles.author}}</h5>
-                    <p>{{articles.description}}</p>
-                    <p> PublishedAt: {{articles.publishedAt}}</p>
-                    </p>
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-        {% endmacro %}
 
-{% macro getNewsList(category) %}
-    {% for news in category%}
-       <a class="dropdown-item" href="{{news.url}}" target="_blank">{{news.name}}</a>
-    {% endfor%}
-{% endmacro %}
+ {% macro displayArticleList(articles) %}
+         
+             <div class="row">
+                {% for i in articles %}
+                 <div class="col-lg-6 mb-4 col-xs-12 col-sm-12 col-md-4 ">
+                    <div class="thumbnail">
+                        <div class="caption">
+                            <p>
+                            <img src="{{i.urlToImage}}" alt="" width="80%">
+                            <h3> {{i.title}}</h3>
+                            <h5> {{i.author}}</h5>
+                            <p>{{i.description}}</p>
+                            <p> PublishedAt: {{i.publishedAt}}</p>
+                            <a href="{{i.url}}">see more</a>
+                            </p>
+                        </div>
+                        
+                    </div>
+                 </div>
+                {% endfor %}
+            </div>
+         </div>
+         {% endmacro %}
+
+         
+
 
 
     </div>

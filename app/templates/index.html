@@ -8,14 +8,11 @@
 {% endblock%}
 
 {% block content%}
-<div class="panel panel-danger">
-    <h2 class="my-4 panel-heading">TOP NEWS</h2>
-
-    <ul>
-    {{macro.displayNewsList(category)}}
-    </ul>
+<div class="panel">
+    
+    <marquee behavior="scroll" direction="left"><h2>CHAP CHAP NEWS BREEZE</h2></marquee>
 </div>
-<div class="panel panel-success">
+<div class="panel panel-danger">
     <h2 class="my-4 panel-heading">Sports Headlines</h1>
 
     <ul>
@@ -29,6 +26,48 @@
     {{macro.displayNewsList(business)}}
     </ul>
 </div>
+<div class="panel panel-danger">
+    <h2 class="my-4 panel-heading">entertainment Headlines</h1>
+
+    <ul>
+    {{macro.displayNewsList(entertainment)}}
+    </ul>
+</div>
+<div class="panel panel-danger">
+    <h2 class="my-4 panel-heading">Health Headlines</h1>
+
+    <ul>
+    {{macro.displayNewsList(health)}}
+
+    </ul>
+</div>
+
+    <div class="panel panel-danger">
+        <h2 class="my-4 panel-heading">technology Headlines</h1>
+    
+        <ul>
+        {{macro.displayNewsList(technology)}}
+        </ul>
+    </div>
+    <div class="panel panel-danger">
+        <h2 class="my-4 panel-heading">science Headlines</h1>
+    
+        <ul>
+        {{macro.displayNewsList(science)}}
+        </ul>
+    </div>
+    <div class="panel panel-danger">
+        <h2 class="my-4 panel-heading">General Headlines</h1>
+    
+        <ul>
+        {{macro.displayNewsList(general)}}
+        </ul>
+    </div>
+
+
+
+
+
 <div class="container ">
     <div class="row ">
         <div class="col-md-6">
@@ -37,7 +76,7 @@
                 <li class="icon-item"><a href="http://facebook.com" target="_blank" title="Facebook"><i class="fa fa-facebook-official" aria-hidden="true"></i></a></li>
                 <li class="icon-item"><a href="http://twitter.com" target="_blank" title="Twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
                 <li class="icon-item"><a href="http://github.com" target="_blank" title="Github"><i class="fa fa-github" aria-hidden="true"></i></a></li>
-                <li class="icon-item"><a href="http://linkedin.com" target="_blank" title="Github"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                <li class="icon-item"><a href="http://linkedin.com" target="_blank" title="linkedin"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
             </ul>
         </div>
         <div class="col-md-6">
@@ -54,3 +93,6 @@
     </div>
 </div>
 {% endblock %}
+
+
+    

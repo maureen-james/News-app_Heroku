@@ -18,3 +18,16 @@
 h2{
     text-align: center;
 }
+p{
+    font-size: 22px;
+}
+a{
+    font-size: 20px;
+}
+.card-body{
+    background-color: #ACC8E5;
+    color:#112117;
+    border: 2px solid rgb(151, 145, 229);
+    border-radius: 10px;
+    box-shadow:15px 20px purple;
+}

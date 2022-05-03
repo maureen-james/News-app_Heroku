@@ -1,77 +1,54 @@
-# from flask import render_template
-# import APP
-# from ..requests import get_news, get_articles, process_results
-# from models import Source, Article
-
-
-# @APP.route('/')
-# def index():
-#     '''
-#     View root page function that returns the index page and its data
-#     '''
-#     #Get the most popular news list
-#     sports = get_news('sports')
-#     technology = get_news('technology')
-#     health = get_news('health')
-#     business = get_news('business')
-#     entertainment = get_news('entertainment')
-#     print(technology)
-
-#     title = 'DailyNews'
-#     return render_template('index.html', title = title, sports = sports, technology = technology, health = health, business = business, entertainment = entertainment)
-
-# @APP.route('/articles/<news_id>')
-# def articles(news_id):
-#     '''
-#     A view function that will return the source of the article and its data
-#     '''
-#     articles = get_articles(news_id)
-#     return render_template('articles.html', articles = articles)
-
 from . import main
-from flask import render_template,request,redirect,url_for,abort
-from ..request import get_news, get_article,search_for_article,process_results
+from flask import render_template
+from ..request import get_news, get_articles
 
 
 @main.route('/')
 def index():
-    # articles=get_article(source_id)
-    articles=get_news('category')
+
     sports=get_news('sports')
     business=get_news('business')
-    # sources=get_news()
+    entertainment=get_news('entertainment')
+    health=get_news('health')
+    technology=get_news('technology')
+    science=get_news('science')
+    general=get_news('general')
+    
 
-    search=request.args.get('search_name')   
+    
+    return render_template('index.html',sports=sports,business=business,entertainment=entertainment,health=health,technology=technology,science=science,general=general)   
 
-    if search:
-        return redirect(url_for('.search',article_name=search))
-    else:
-         return render_template('index.html',article=articles,sports=sports,business=business)   
+@main.route('/sports/')
+def sports():
+    sports=get_news('sports')
+    
+    return render_template('sports.html',sports=sports)
 
-   
+@main.route('/business/')
+def business():
+    business=get_news('business')
+    
+    return render_template('business.html',business=business)
 
-@main.route('/articles')
+
+
+
+@main.route('/article/')
 def articles():
     '''
     A view function that will return the source of the article and its data
     '''
-    articles = get_article()
-     
+    # articles = get_article('articles')
+    # sports=get_news('sports')
+    # business=get_news('business')
+    article = get_articles('article')
+
+    if article:
+        for i in article:
+            name = i.name
+    else:
+         name = ""
+    print (article)    
     
-     #Make request to get article from server
-    # search=request.args.get('search_name')   
-
-    # if search:
-    #     return redirect(url_for('.search',article_name=search))
-    # else:
-    return render_template('articles.html', articles = articles)    
+    return render_template('article.html',article=article,name=name)
     
-
-@main.route('/search/<article_name>')
-def search(article_name):
-    artcle_name_list=article_name.split(" ")
-    artcle_name_format="+".join(artcle_name_list)
-    searched_article=search_for_article(artcle_name_format)
-    title=f'{article_name}'
-
-    return render_template('search.html',title=title,article=searched_article)
