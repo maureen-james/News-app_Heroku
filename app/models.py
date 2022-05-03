@@ -18,13 +18,14 @@ class Article:
     News Article class to define News Article Objects
     '''
 
-    def __init__(self,author,title,description,url,source,image,publishedate,content):
+    def __init__(self,id,author,urlToImage,description,title,url,publishedAt,source):
+        self.id = id
         self.author = author
-        self.title =title 
+        self.urlToImage=urlToImage
         self.description = description
+        self.title =title 
         self.url = url
         self.source = source
-        self.image= image
-        self.publishedate= publishedate
-        self.content= content
+        self.publishedAt= publishedAt
+        self.source= source
 

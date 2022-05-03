@@ -1,26 +1,48 @@
-{% macro displaySources(source_list)%}
-    {% for source in source_list%}
-        <!-- <li>{{source.source['name']}}</li> -->
+{% macro displayNewsList(category)%}
+    {% for news in category%}
+        
     <div class="container">
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-lg-6 mb-4 col-xs-12 col-sm-12 col-md-4 ">
                 <div class="card h-100">
-                <img  src="{{source.urlToImage}}" alt="" class="img-responsive">
-                <div class="card-body">
+                  <div class="card-body">
                     <h4 class="card-title">
-                    <a href="{{source.url}}" target="_blank">{{source.title}}</a>
+                    <a href="{{news.url}}" target="_blank">{{news.title}}</a>
                     </h4>
-                    <p class="card-text">{{source.description}}</p>
-                    <p>Posted from:<span class="label label-primary">{{source.source['name']}}</span>  <span></span> Posted At:<span class="label label-danger">{{source.publishedAt}}</span></p>
-            </div>
+                    <p class="card-text">{{news.description}}</p>
+                </div>
             <hr style="border-width: 2px;">
         </div>
-    </div>
+    </div> -->
     {% endfor %}
 {% endmacro%}
+{% macro displayArticlesList(articles_data) %}
+<div id="articles">
+    <div class="row">
+        {% for articles in articles_data %}
+        <div class="col-lg-6 mb-4 col-xs-12 col-sm-12 col-md-4 ">
+            <div class="thumbnail">
+                <div class="caption">
+                    <p>
+                    <img src="{{articles.urlToImage}}" alt="" width="80%">
+                    <h3> {{articles.title}}</h3>
+                    <h4> {{ articles.name}}</h4>
+                    <h5> {{articles.author}}</h5>
+                    <p>{{articles.description}}</p>
+                    <p> PublishedAt: {{articles.publishedAt}}</p>
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% endmacro %}
 
-{% macro getSources(source_list) %}
-    {% for source in source_list %}
-       <a class="dropdown-item" href="{{source.url}}" target="_blank">{{source.name}}</a>
+{% macro getNewsList(category) %}
+    {% for news in category%}
+       <a class="dropdown-item" href="{{news.url}}" target="_blank">{{news.name}}</a>
     {% endfor%}
 {% endmacro %}
+
+
+    </div>
+</div>

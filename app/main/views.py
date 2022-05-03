@@ -30,43 +30,42 @@
 
 from . import main
 from flask import render_template,request,redirect,url_for,abort
-from ..request import get_sources, get_article,search_for_article
+from ..request import get_news, get_article,search_for_article,process_results
 
 
 @main.route('/')
 def index():
     # articles=get_article(source_id)
-    articles=get_article('source_id')
-    sport=search_for_article('sports')
-    business=search_for_article('business')
-    sources=get_sources()
+    articles=get_news('category')
+    sports=get_news('sports')
+    business=get_news('business')
+    # sources=get_news()
 
-    #Make request to get article from server
-    search=request.args.get('search_name')
+    search=request.args.get('search_name')   
 
     if search:
         return redirect(url_for('.search',article_name=search))
     else:
-        return render_template('index.html',articles=articles,sports=sport,business=business,sources=sources)
+         return render_template('index.html',article=articles,sports=sports,business=business)   
+
+   
+
+@main.route('/articles')
+def articles():
+    '''
+    A view function that will return the source of the article and its data
+    '''
+    articles = get_article()
+     
     
+     #Make request to get article from server
+    # search=request.args.get('search_name')   
 
-@main.route('/sports')
-def sources():
-    sport=search_for_article('sports')
-    search=request.args.get('search_name')
-    if search:
-        return redirect(url_for('.search',article_name=search))
-    else:
-        return render_template('sports.html',sports=sport)
-
-@main.route('/business')
-def business():
-    business=search_for_article('business')
-    search=request.args.get('search_name')
-    if search:
-        return redirect(url_for('.search',article_name=search))
-    else:
-        return render_template('business.html',business=business)
+    # if search:
+    #     return redirect(url_for('.search',article_name=search))
+    # else:
+    return render_template('articles.html', articles = articles)    
+    
 
 @main.route('/search/<article_name>')
 def search(article_name):
