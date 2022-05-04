@@ -15,7 +15,7 @@ search_url=None
 def configure_request(app):
     global api_key,base_url,article_url,search_url
 
-    api_key = app.config['NEWS_API_KEY']
+    api_key = '0a94628023534ae0a969eb3432d2e8a9'
     base_url=app.config['NEWS_API_BASE_URL']
     article_url=app.config['NEWS_ARTICLE_BASE_URL']
     search_url=app.config['SEARCH_SOURCES']
@@ -24,7 +24,7 @@ def get_news(category):
     '''
     Function that gets the json response from our url request
     '''
-    source_api_url='https://newsapi.org/v2/sources?language=en&category={}&apiKey={}'.format(category,api_key)
+    source_api_url='https://newsapi.org/v2/sources?language=en&category={}&apiKey=0a94628023534ae0a969eb3432d2e8a9'.format(category,api_key)
 
     with urllib.request.urlopen(source_api_url) as url:
         unread_data=url.read()
@@ -61,7 +61,7 @@ def process_results(news_list):
 
 def get_articles(id):
 
-    article_url= 'https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey={}'.format(id,api_key)
+    article_url= 'https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=0a94628023534ae0a969eb3432d2e8a9'.format(id,api_key)
 
     with urllib.request.urlopen(article_url) as url:
         article_details_data = url.read()
